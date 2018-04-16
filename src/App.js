@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 //import { Link } from 'react-router-dom'
+//import { Redirect } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import SearchField from './SearchField'
@@ -12,7 +13,8 @@ class BooksApp extends React.Component {
   state = {
     books: [],
     searchedBooks: [],
-    showSearchPage: false
+    showSearchPage: false,
+    firstSearchQuery: ''
   }
 
   getAllBooks = () => {
@@ -30,8 +32,12 @@ class BooksApp extends React.Component {
       this.getAllBooks()
     })
   }
+//Method to call within SearchField component to get the first search query
+  updateFirstQuery = (firstQuery) => {
+    this.setState({firstSearchQuery: firstQuery})
+  }
 
-  render() {
+  render() { 
     return (
       <div className="app">
         <header className="app-header">
@@ -40,14 +46,15 @@ class BooksApp extends React.Component {
         
         <Route exact path="/" render={()=>(
           <div>
-            <SearchField/>
+            <SearchField updateFirstQuery={this.updateFirstQuery}/>
             <BooksList 
               books={this.state.books}
               updateShelf={this.updateShelf}/> 
           </div>
         )}/>
+      
         <Route path="/search" render={()=>(
-          <SearchBooks/>
+          <SearchBooks firstQuery={this.state.firstQuery}/>
         )}/>
       </div>
     )
