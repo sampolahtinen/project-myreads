@@ -1,18 +1,18 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-//import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import SearchField from './SearchField'
 import BooksList from './BooksList'
 import SearchBooks from './SearchBooks'
-//import Book from './Book';
 
 class BooksApp extends React.Component {
   state = {
     books: [],
     searchedBooks: [],
-    showSearchPage: false
+    showSearchPage: false,
+    firstSearchQuery: ''
   }
 
   getAllBooks = () => {
@@ -30,28 +30,41 @@ class BooksApp extends React.Component {
       this.getAllBooks()
     })
   }
+//Method to call within SearchField component to get the first search query
+  updateFirstQuery = (firstQuery) => {
+    this.setState({firstSearchQuery: firstQuery})
+  }
 
-  render() {
+  render() { 
     return (
       <div className="app">
+      <Link to='/'>
         <header className="app-header">
           <h1>myReads</h1>
         </header>
+        </Link>
         
         <Route exact path="/" render={()=>(
           <div>
-            <SearchField/>
+            <SearchField updateFirstQuery={this.updateFirstQuery}/>
             <BooksList 
               books={this.state.books}
               updateShelf={this.updateShelf}/> 
           </div>
         )}/>
         <Route path="/search" render={()=>(
-          <SearchBooks/>
+          <SearchBooks
+            selectedBooks={this.state.books} 
+            firstQuery={this.state.firstSearchQuery}
+            updateShelf={this.updateShelf}/>
         )}/>
       </div>
+
     )
   }
 }
 
 export default BooksApp
+
+
+

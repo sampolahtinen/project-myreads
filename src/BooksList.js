@@ -21,9 +21,9 @@ class BooksList extends React.Component {
                     <h2 className='section-title'>Current Books</h2>
                     <hr/>
 
-                    <ol className='current-books-list'>
+                    <ol className='books-list'>
                     {currentBooks.map((book)=>(
-                        <li key={book.id} className='current-books-list-item'>
+                        <li key={book.id} className='book-list-item'>
                             <Book book={book} updateShelf={this.props.updateShelf}/>
                         </li>
                     ))}
@@ -35,7 +35,7 @@ class BooksList extends React.Component {
                     <hr/>
                     <ol className='books-list'>
                     {finishedBooks.map((book)=>(
-                        <li key={book.id} className='current-books-list-item'>
+                        <li key={book.id} className='book-list-item'>
                             <Book book={book} updateShelf={this.props.updateShelf}/>
                         </li>
                     ))}
@@ -47,7 +47,7 @@ class BooksList extends React.Component {
                     <hr/>
                     <ol className='books-list'>
                     {wishList.map((book)=>(
-                        <li key={book.id} className='current-books-list-item'>
+                        <li key={book.id} className='book-list-item'>
                             <Book book={book} updateShelf={this.props.updateShelf}/>
                         </li>
                     ))}

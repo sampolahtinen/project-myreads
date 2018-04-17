@@ -11,16 +11,9 @@ class Book extends React.Component {
 
     state = {
         shelf: this.props.book.shelf,
-        showShelfMenu: 'no' //'yes
     }
-    /*updateShelf = (book,shelf) => {
-        BooksAPI.update(book, shelf).then((res)=>{
-          this.getAllBooks()
-        })
-      }*/
     render() {
         return (
-          //  this.setState({shelf: this.props.bookShelf})
             <div className='book'>
                 <div className='book-cover' style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks.thumbnail})` }}>
                     <div className='book-shelf-changer' >
@@ -31,7 +24,7 @@ class Book extends React.Component {
                             }}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
-                                <option value="wantToRead" onClick={()=>{console.log("test")}}>Want to Read</option>
+                                <option value="wantToRead">Want to Read</option>
                                 <option value="read">Read</option>
                                 <option value="none">None</option>
                             </select>
@@ -41,7 +34,7 @@ class Book extends React.Component {
                 </div>
                 <div className='book-info-wrapper'>
                     <h3 className='book-title'>{this.props.book.title}</h3>
-                    <p className='book-author'>{this.props.book.authors[0]}</p>
+                    <p className='book-author'>{this.props.book.authors}</p>
                 </div>   
             </div>
         )

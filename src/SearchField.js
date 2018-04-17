@@ -1,6 +1,4 @@
 import React from 'react'
-//import { Link } from 'react-router-dom'
-//import { Route } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 import './App.css'
 //import SearchBooks from './SearchBooks'
@@ -13,24 +11,18 @@ class SearchField extends React.Component {
     navigateToSearch = (event)  => {
         if (event.key === 'Enter') {
             console.log("MOOOOI");
+            this.props.updateFirstQuery(event.target.value)
             this.setState({query: event.target.value})
         }
+
     }
 
     render() {
-        if(this.state.query !== '') {
-            return (
-                <div>
-                <Redirect push to={{
-                    pathname: '/search',
-                    state: {passedQuery: this.state.query}
-                }}
-                />
-                </div>
-            )
-        }
         return (
             <div className='search-field-wrapper'>
+            {this.state.query !== '' ? <Redirect push to={{
+                pathname: '/search',
+                search: `?query=${this.state.query}`}}/> :null}
                 <input
                     onKeyPress={this.navigateToSearch.bind(this)} //binding this to component
                     className='search-field' 
