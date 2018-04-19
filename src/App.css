@@ -35,12 +35,13 @@ header {
   position: fixed;
   top: 150px;
   left: 0;
-  background-color: #4d4c5924;
   z-index: 1000;
+  opacity: 0.5;
+  margin-left: 5px;
 }
 
 .back-arrow:hover {
-  background-color: #362c36;
+  opacity: 1;
 }
 
 .add-icon {
@@ -52,16 +53,17 @@ header {
   background-position: 5px center;
   background-size: 3em;
   position: fixed;
-  top: 150px;
+  top: 102px;
   right: 0;
-  background-color: #4d4c5924;
   z-index: 1000;
 }
 .add-icon img {
-  filter: invert(42%);
+  filter: invert(72%);
+  width: 48px;
+  height: 48px;
 }
 .add-icon:hover {
-  background-color: #362c36;
+  filter: invert(50%);
 }
 
 header h1 {

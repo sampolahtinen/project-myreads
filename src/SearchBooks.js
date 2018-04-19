@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import Book from './Book'
 import * as BooksAPI from './BooksAPI'
 import arrowBack from "./icons/arrow-back.svg";
-import data from './searchTerms.json'
+import searchTerms from './searchTerms.json'
 
 class SearchBooks extends React.Component {
     static propTypes = {
@@ -21,9 +21,10 @@ class SearchBooks extends React.Component {
         if(this.state.query === '') return
         this.searchBooks(this.state.query)
     }
+
     assignShelf = (SearchBooks) => {
         SearchBooks.forEach(book => {
-            //Find return the first matched element from the array it is called on. IF not found, return undefined
+            //Find returns the first matched element from the array it is called on. IF not found, return undefined
             let selectedBook = this.props.selectedBooks.find( userBook => userBook.id === book.id  )
             console.log(selectedBook)
             if(selectedBook) {
@@ -42,23 +43,30 @@ class SearchBooks extends React.Component {
         BooksAPI.search(query).then((books)=>{
             this.assignShelf(books);
             this.setState({books: books});
-            
         })
     }
-    getSearchTerms = (data) => {
-        JSON.parse(data)     
-    }
     validateSearchQuery = (query) => {
-        let validSearchTerms = this.getSearchTerms({data})
-        query.match(validSearchTerms)
+        const match = new RegExp(query, 'i')
+        searchTerms.searchTerm.forEach((term) => {
+            console.log(match.test(query))
+        })
     }
 
     render() {
-        return <div>
+        return <div> 
             <div className="search-field-wrapper">
-              <input className="search-field" type="text" placeholder="Search new books..." value={this.state.query //defaultValue={this.props.firstQuery}
-                } onChange={event => this.updateQuery(event.target.value)} />
+              <input 
+                className="search-field" 
+                type="text" 
+                placeholder="Search new books..." 
+                value={this.state.query} //defaultValue={this.props.firstQuery}
+                onChange={event => this.updateQuery(event.target.value)} />
             </div>
+            <Link to="/">
+              <div className="back-arrow">
+                <img alt="arrow back icon" src={arrowBack} />
+              </div>{" "}
+            </Link>
             {this.state.query !== "" && <div className="book-list">
                 <section className="search-books">
                   <h2 className="section-title">Search Results</h2>
@@ -76,11 +84,6 @@ class SearchBooks extends React.Component {
                       )}
                   </ol>
                 </section>
-                <Link to="/">
-                  <div className="back-arrow">
-                    <img alt="arrow back icon" src={arrowBack} />
-                  </div>{" "}
-                </Link>
               </div>}
           </div>;}
 }
