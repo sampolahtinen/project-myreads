@@ -36,7 +36,13 @@ class SearchBooks extends React.Component {
     }
     updateQuery = (query) => {
         this.setState({query: query.trim()});
-        this.searchBooks(query);
+        if (this.validateSearchQuery(this.state.query)) {
+            this.searchBooks(query);
+        } else {
+            alert("Not valid search term!")
+            this.setState({query: ''})
+        }
+        
     }
     searchBooks = (query) => {
         if(query === '') return
@@ -46,10 +52,13 @@ class SearchBooks extends React.Component {
         })
     }
     validateSearchQuery = (query) => {
-        const match = new RegExp(query, 'i')
-        searchTerms.searchTerm.forEach((term) => {
-            console.log(match.test(query))
-        })
+        let match = new RegExp(query, 'i')
+        let filteredTerms = searchTerms.searchTerm.filter( term => match.test(term) )
+        if (filteredTerms.length > 0) { 
+            return true
+        } else {
+            return false
+        }
     }
 
     render() {
