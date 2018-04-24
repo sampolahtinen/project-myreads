@@ -165,6 +165,15 @@ textarea {
   color: #4d4c59;
 }
 
+.no-results {
+  margin-top: 200px;
+  flex-grow: 2;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0;
+  color: #4d4c59;
+}
+
 /* BOOK COMPONENT CSS */
 
 .book {
