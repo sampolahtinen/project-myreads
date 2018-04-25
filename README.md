@@ -5,6 +5,6 @@ This is a simple book shelf app that let's you keep track of your books. It let'
 # Installation
 1. Download/Clone this repository
 2. Open terminal
-3. Navigate to the project folder with terminal
+3. Navigate to the project folder
 4. Type "npm start" to launch the application
 
