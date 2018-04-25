@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class Book extends React.Component {
 
@@ -19,6 +20,13 @@ class Book extends React.Component {
 
     render() {
         return (
+            <ReactCSSTransitionGroup
+                transitionName="books"
+                transitionAppear={true}
+                transitionAppearTimeout={500}
+                transitionEnter={false}
+                transitionLeave={false}>   
+
             <div className='book'>
                 <div className='book-cover' style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks.thumbnail})`, backgroundColor: "grey"}}>
                 <div className='book-shelf-changer' >
@@ -39,8 +47,9 @@ class Book extends React.Component {
                 <div className='book-info-wrapper'>
                     <h3 className='book-title'>{this.props.book.title}</h3>
                     <p className='book-author'>{this.props.book.authors}</p>
-                </div>   
+                </div>
             </div>
+            </ReactCSSTransitionGroup>
         )
     }
 }

@@ -3,6 +3,7 @@
     "@fortawesome/fontawesome-free-solid": "^5.0.10",
     "@fortawesome/react-fontawesome": "0.0.18",
     "react": "^15.5.4",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^15.5.4",
     "react-fontawesome": "^1.6.1",
     "react-icons": "^2.2.7"

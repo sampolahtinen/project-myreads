@@ -3,6 +3,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './App.css'
 import Book from './Book'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
 
 class BooksList extends React.Component {
 
@@ -16,6 +18,12 @@ class BooksList extends React.Component {
         let finishedBooks = this.props.books.filter((book)=> book.shelf === 'read');
         let wishList = this.props.books.filter((book)=> book.shelf === 'wantToRead');
         return (
+            <ReactCSSTransitionGroup
+                transitionName="slide-in"
+                transitionAppear={true}
+                transitionAppearTimeout={500}
+                transitionEnter={false}
+                transitionLeave={false}> 
             <div className='book-list'>
                 <section className='current-books'>
                     <h2 className='section-title'>Current Books</h2>
@@ -54,6 +62,7 @@ class BooksList extends React.Component {
                     </ol>
                 </section>
             </div>
+            </ReactCSSTransitionGroup>
         )
     }
 }

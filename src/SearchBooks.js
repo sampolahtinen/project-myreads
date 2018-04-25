@@ -4,8 +4,9 @@ import './App.css'
 import PropTypes from 'prop-types'
 import Book from './Book'
 import * as BooksAPI from './BooksAPI'
-import arrowBack from "./icons/arrow-back.svg";
+import arrowBack from "./icons/arrow-back.svg"
 import searchTerms from './searchTerms.json'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 class SearchBooks extends React.Component {
     static propTypes = {
@@ -13,11 +14,13 @@ class SearchBooks extends React.Component {
         firstQuery: PropTypes.string,
         updateShelf: PropTypes.func.isRequired
     }
+
     state = {
         query: this.props.firstQuery,
         books: [],
         validQuery: true
     }
+
     componentDidMount = () => {
         if(this.state.query === '') return
         this.searchBooks(this.state.query)
@@ -35,6 +38,7 @@ class SearchBooks extends React.Component {
             }
         })
     }
+
     searchBooks = (query) => {
         if (query === '') return
         BooksAPI.search(query).then((books) => {
@@ -45,6 +49,7 @@ class SearchBooks extends React.Component {
             });
         }).catch(error => console.log(error))
     }
+
     validateSearchQuery = (query) => {
         //console.log("query at validateSearchQuery function: " + query)
         let match = new RegExp(query, 'i')
@@ -61,6 +66,7 @@ class SearchBooks extends React.Component {
             return false
         }
     }
+
     updateQuery = (query) => {
         //console.log("query at updateQuery function: " + query)
         this.setState({query: query});
@@ -81,6 +87,13 @@ class SearchBooks extends React.Component {
                         value={this.state.query}
                         onChange={event => this.updateQuery(event.target.value)}/>
                 </div>
+                <ReactCSSTransitionGroup
+                    transitionName="slide-in"
+                    transitionAppear={true}
+                    transitionAppearTimeout={500}
+                    transitionEnter={false}
+                    transitionLeave={false}>
+                    
                 <Link to="/">
                     <div className="back-arrow">
                         <img alt="arrow back icon" src={arrowBack} />
@@ -107,9 +120,10 @@ class SearchBooks extends React.Component {
                         {this.state.validQuery === false && <h3 className="no-results">No results :(...</h3>}
                     </section>
                 </div>
+                </ReactCSSTransitionGroup>
             </div>
         )
-        }
+    }
 }
 
 export default SearchBooks
